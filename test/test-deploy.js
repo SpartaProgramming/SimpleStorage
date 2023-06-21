@@ -25,7 +25,7 @@ describe("SimpleStorage", function () {
 
   }) // co ma zrobić
 
-  it.only("Should update when we call store", async function() {
+  it("Should update when we call store", async function() {
 
     const expectedValue = "7";
     const transactionResponse = await SimpleStorage.store(expectedValue);

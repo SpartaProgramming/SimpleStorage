@@ -1,13 +1,15 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 require("./tasks/block-number") //import 
+require("hardhat-gas-reporter");
+require('solidity-coverage')
 //require("@nomiclabs/hardhat-etherscan"); //daje błądya
 
 
-const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
-const SEPOLIA_PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY;
-const ETHERSACN_API_KEY = process.env.ETHERSACN_API_KEY;
-
+const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || ""; //if doesn't exist equals empty string
+const SEPOLIA_PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY || "0xkey";
+const ETHERSACN_API_KEY = process.env.ETHERSACN_API_KEY ||"key";
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "key";
 
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -28,7 +30,18 @@ module.exports = {
   solidity: "0.8.18",
   etherscan: {
     apiKey: ETHERSACN_API_KEY,
+  },
+  gasReporter: {
+
+    enabled: true,
+    outputFile: "gas-report.txt",
+    noColors: true,
+    currency: "USD",
+    coinmarketcap: COINMARKETCAP_API_KEY, // make request
+    token: "MATIC",
+
   }
+
 };
 
 //5e21fad23bb5a1c7f80fa16145f4c37cfe56efc7d2ce9137e3d644ace7d30a11
